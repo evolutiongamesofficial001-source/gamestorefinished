@@ -15,7 +15,7 @@ const dl=(u,k,l)=>u?`<a class="btn" href="${esc(u)}" download>${IC[k]} ${l}</a>`
 
 async function loadCat(){
   try{
-    const j=CFG.CATALOG?await fetch(CFG.CATALOG+'?t='+Date.now()).then(r=>r.json()):JSON.parse(localStorage.evo_catalog||'null')||{};
+    const j=await fetch(CFG.DB+'/catalog.json?t='+Date.now()).then(r=>r.json())||{};
     const s=JSON.stringify(j);if(s===raw)return false;raw=s;cat={games:j.games||[],events:j.events||[]};return true;
   }catch(e){return false}
 }
